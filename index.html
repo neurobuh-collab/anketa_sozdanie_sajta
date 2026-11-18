@@ -7,100 +7,126 @@
 <meta name="description" content="Анкета для бухгалтера: услуги, тон, цвета и контакты для будущего сайта-визитки.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: one calm column like a ledger page; sticky progress strip on top, section index chips, answer rows as tappable lines. */
+/* Layout: светлая страница, крупные заголовки с градиентом «графит → фиолетовый», плашки-пилюли,
+   карточки с сиреневым градиентом, чёрные кнопки-пилюли, бегущая строка с темами анкеты. */
 :root{
-  --paper:#F6F7F9;
-  --sheet:#FFFFFF;
-  --ink:#1D2740;
-  --ink-soft:#56607A;
-  --line:#DCE0E8;
-  --accent:#2F55D4;
-  --mark:#F3D54E;
-  --mark-soft:#FBF1C0;
-  --warn:#B4401F;
-  --ok:#2D7A4B;
-  --display:"Unbounded","Manrope",system-ui,sans-serif;
-  --body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --bg:#FFFFFF;
+  --soft:#F8F6FD;
+  --card:#FFFFFF;
+  --ink:#18181B;
+  --muted:#64708A;
+  --line:#E8E5F0;
+  --violet:#9A54EE;
+  --violet-2:#BC8BF9;
+  --violet-soft:#F3ECFE;
+  --violet-line:#E2D3FC;
+  --warn:#C2410C;
+  --btn:#18181B;
+  --btn-ink:#FFFFFF;
+  --glow:rgba(154,84,238,.16);
+  --font:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#12161F;--sheet:#1A202C;--ink:#E7EAF1;--ink-soft:#A0A8BC;--line:#2E3647;
-  --accent:#8AA4FF;--mark:#E9C93A;--mark-soft:#3A3417;--warn:#FF9C7A;--ok:#7BD39C;color-scheme:dark}}
+  --bg:#0D0B12;--soft:#15121D;--card:#18151F;--ink:#F4F4F5;--muted:#A3A3B5;--line:#2A2535;
+  --violet:#B07CF7;--violet-2:#D1B0FB;--violet-soft:#241A35;--violet-line:#3D2C5C;--warn:#FB923C;
+  --btn:#F4F4F5;--btn-ink:#18181B;--glow:rgba(176,124,247,.22);color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#12161F;--sheet:#1A202C;--ink:#E7EAF1;--ink-soft:#A0A8BC;--line:#2E3647;
-  --accent:#8AA4FF;--mark:#E9C93A;--mark-soft:#3A3417;--warn:#FF9C7A;--ok:#7BD39C;color-scheme:dark}
+  --bg:#0D0B12;--soft:#15121D;--card:#18151F;--ink:#F4F4F5;--muted:#A3A3B5;--line:#2A2535;
+  --violet:#B07CF7;--violet-2:#D1B0FB;--violet-soft:#241A35;--violet-line:#3D2C5C;--warn:#FB923C;
+  --btn:#F4F4F5;--btn-ink:#18181B;--glow:rgba(176,124,247,.22);color-scheme:dark}
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:120px}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--body);
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--font);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:820px;margin:0 auto;padding-block:32px 80px}
+.wrap{max-width:860px;margin:0 auto;padding-block:8px 96px}
 
-/* top strip */
-.strip{position:sticky;top:0;z-index:5;background:var(--paper);padding-block:10px 8px;border-bottom:1px solid var(--line);
-  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-top:calc(10px + env(safe-area-inset-top,0px))}
-.strip-in{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
-.prog{display:flex;align-items:center;gap:12px;font:500 12px/1 var(--mono);color:var(--ink-soft)}
-.bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--mark);transition:width .3s}
-.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+/* градиентный текст, как в примере */
+.grad{background:linear-gradient(90deg,var(--ink) 0%,var(--violet) 70%,var(--violet-2) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* верхняя панель: прогресс + разделы */
+.strip{position:sticky;top:0;z-index:5;padding-top:calc(10px + env(safe-area-inset-top,0px));padding-bottom:10px}
+.strip-in{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:8px;background:color-mix(in srgb,var(--card) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;padding:10px 12px;box-shadow:0 6px 24px -12px var(--glow)}
+.prog{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:500;color:var(--muted)}
+.bar{flex:1;height:6px;background:var(--violet-soft);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--violet-2));border-radius:3px;transition:width .3s}
+button.mini{flex:none;font-size:13px;padding:8px 12px;border-radius:10px}
+.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
-.nav a{flex:none;font-size:13px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--sheet)}
-.nav a:hover,.nav a:focus-visible{color:var(--ink);border-color:var(--ink-soft)}
+.nav a{flex:none;font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.nav a:hover,.nav a:focus-visible{border-color:var(--violet-line);background:var(--violet-soft)}
 
-/* intro */
-header.intro{padding-block:28px 12px;display:grid;gap:14px}
-.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-h1{font:600 clamp(28px,5vw,40px)/1.15 var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
-.lead{margin:0;max-width:62ch;color:var(--ink-soft)}
-.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:6px 0 0;padding:0;list-style:none}
-.howto li{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--ink-soft)}
-.howto b{display:block;color:var(--ink);font-size:15px;margin-bottom:2px}
-.star{color:var(--warn);font-weight:700}
+/* первый экран */
+header.intro{padding-block:44px 8px;display:grid;gap:18px;justify-items:center;text-align:center}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink);background:var(--violet-soft);border:1px solid var(--violet-line);padding:5px 12px 5px 8px;border-radius:10px}
+.pill i{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--violet),var(--violet-2));color:#fff;font-style:normal;font-size:12px}
+h1{font-weight:600;font-size:clamp(34px,6.4vw,58px);line-height:1.04;letter-spacing:-.035em;margin:0;text-wrap:balance;max-width:16ch}
+.lead{margin:0;max-width:56ch;color:var(--muted);font-size:clamp(16px,2vw,18px)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.saved{font-size:13px;line-height:1.5;color:var(--muted);margin:0}
 
-/* sections */
-section.sec{margin-top:36px}
-.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
-.sec-n{font:500 13px/1 var(--mono);color:var(--ink-soft)}
-h2{font:600 22px/1.25 var(--display);margin:0}
-.q{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;margin-bottom:12px}
+/* бегущая строка */
+.marquee{margin:28px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 8px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee-track{display:flex;width:max-content;animation:scroll 38s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee span{flex:none;font-weight:600;font-size:clamp(18px,2.6vw,26px);letter-spacing:-.02em;color:var(--muted);opacity:.55;padding:0 22px;white-space:nowrap}
+.marquee span b{font-weight:600;color:var(--violet);opacity:1}
+@keyframes scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
+/* три карточки «как заполнять» */
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:20px 0 0;padding:0;list-style:none;width:100%;text-align:left}
+.howto li{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--violet-soft),var(--card) 70%);border:1px solid var(--violet-line);border-radius:22px;padding:18px 18px 16px;font-size:14px;color:var(--muted)}
+.howto b{display:block;color:var(--ink);font-size:17px;font-weight:600;letter-spacing:-.01em;margin-bottom:4px}
+.star{color:var(--violet);font-weight:700}
+
+/* разделы */
+section.sec{margin-top:56px}
+.sec-h{display:grid;justify-items:start;gap:10px;margin-bottom:18px}
+.sec-n{display:inline-flex;align-items:center;font-size:13px;font-weight:600;color:var(--violet);background:var(--violet-soft);border:1px solid var(--violet-line);padding:3px 10px;border-radius:8px;font-variant-numeric:tabular-nums}
+.sec-n::before{content:"Раздел ";font-weight:500;color:var(--ink);margin-right:4px}
+h2{font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.1;letter-spacing:-.03em;margin:0;
+  background:linear-gradient(90deg,var(--ink) 0%,var(--ink) 45%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:2px}
+
+.q{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 20px 18px;margin-bottom:12px;box-shadow:0 1px 0 rgba(24,24,27,.02),0 10px 30px -22px var(--glow)}
 .q.miss{border-color:var(--warn);box-shadow:0 0 0 1px var(--warn)}
-.q-l{font-weight:700;font-size:16px;margin:0 0 4px;display:block}
-.q-h{font-size:14px;color:var(--ink-soft);margin:0 0 12px}
-.q-l + .opts,.q-l + .inp,.q-l + .scale,.q-l + .grid3{margin-top:10px}
+.q-l{font-weight:600;font-size:17px;letter-spacing:-.01em;margin:0 0 4px;display:block}
+.q-h{font-size:14px;color:var(--muted);margin:0 0 12px}
+.q-l + .opts,.q-l + .inp,.q-l + .scale,.q-l + .grid3{margin-top:12px}
 
-/* options */
-.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
+/* варианты ответов */
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
 .opts.cards{grid-template-columns:1fr}
-.opt{position:relative;display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:15px;line-height:1.4;min-width:0}
-.opt:hover{border-color:var(--ink-soft)}
-.opt input{margin:2px 0 0;flex:none;width:17px;height:17px;accent-color:var(--accent)}
-.opt:has(input:checked){background:var(--mark-soft);border-color:var(--mark)}
-.opt small{display:block;color:var(--ink-soft);font-size:13px}
-.cards .opt{font-size:15px}
-.other{display:flex;gap:8px;align-items:center;margin-top:8px}
-.other span{font-size:14px;color:var(--ink-soft);flex:none}
+.opt{position:relative;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer;font-size:15px;line-height:1.4;min-width:0;background:var(--card);transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--violet-line)}
+.opt input{margin:2px 0 0;flex:none;width:17px;height:17px;accent-color:var(--violet)}
+.opt:has(input:checked){background:var(--violet-soft);border-color:var(--violet)}
+.other{display:flex;gap:8px;align-items:center;margin-top:10px}
+.other span{font-size:14px;color:var(--muted);flex:none}
 
-input[type=text],input[type=url],textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
-textarea{min-height:92px;resize:vertical}
-input:focus-visible,textarea:focus-visible,.opt:has(input:focus-visible),.nav a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text],input[type=url],textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+input[type=text]::placeholder,input[type=url]::placeholder,textarea::placeholder{color:var(--muted);opacity:.7}
+textarea{min-height:96px;resize:vertical}
+input:focus-visible,textarea:focus-visible,.opt:has(input:focus-visible),.nav a:focus-visible,button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
 .inp.short{max-width:260px}
 
-/* scale */
-.scale{display:grid;gap:10px}
+/* шкалы */
+.scale{display:grid;gap:12px}
 .srow{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
 .srow .l{text-align:right;font-size:14px}
 .srow .r{font-size:14px}
 .dots{display:flex;gap:6px}
-.dots label{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;cursor:pointer;font:500 12px/1 var(--mono);color:var(--ink-soft)}
+.dots label{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line);border-radius:12px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);background:var(--card)}
 .dots input{position:absolute;opacity:0;pointer-events:none}
-.dots label:has(input:checked){background:var(--mark);border-color:var(--mark);color:#1D2740}
-.dots label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.dots label:has(input:checked){background:linear-gradient(135deg,var(--violet),var(--violet-2));border-color:transparent;color:#fff}
+.dots label:has(input:focus-visible){outline:2px solid var(--violet);outline-offset:2px}
 @media (max-width:560px){
   .srow{grid-template-columns:1fr 1fr;row-gap:6px}
   .srow .l{text-align:left;grid-column:1}
@@ -108,67 +134,78 @@ input:focus-visible,textarea:focus-visible,.opt:has(input:focus-visible),.nav a:
   .srow .dots{grid-column:1 / -1;justify-content:space-between}
 }
 
-/* grids */
+/* сетки: истории, пакеты, поля, сайты */
 .grid3{display:grid;gap:12px}
 .story{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.story label,.pk label,.fld label{font-size:12px;color:var(--ink-soft);display:grid;gap:4px;min-width:0}
+.story label,.pk label,.fld label{font-size:12px;color:var(--muted);display:grid;gap:4px;min-width:0}
 .pk{display:grid;grid-template-columns:1fr 1.2fr 2fr 1fr;gap:8px}
 .fld{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .site{display:grid;gap:8px;padding-top:4px}
 .site + .site{border-top:1px dashed var(--line);padding-top:12px}
 @media (max-width:640px){.story,.pk{grid-template-columns:1fr}}
-.example{font-size:14px;color:var(--ink-soft);border-left:3px solid var(--mark);padding:2px 0 2px 12px;margin:0 0 12px;display:grid;gap:6px}
+.example{font-size:14px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 12px;display:grid;gap:6px}
+.example b{color:var(--ink)}
 .example p{margin:0}
 
-/* footer / submit */
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.send{margin-top:36px;background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:14px}
-.send p{margin:0}
-.btns{display:flex;flex-wrap:wrap;gap:10px}
-button{font:600 15px/1 var(--body);border-radius:999px;padding:13px 22px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--paper)}
-button.ghost{background:transparent;color:var(--ink)}
-button:disabled{opacity:.6;cursor:progress}
-.msg{border-radius:10px;padding:14px 16px;font-size:15px}
-.msg.warn{background:var(--mark-soft);border:1px solid var(--mark)}
-.msg.ok{border:1px solid var(--ok);color:var(--ink)}
-.msg.ok b{color:var(--ok)}
-.msg.err{border:1px solid var(--warn)}
+/* кнопки */
+button{font:600 15px/1 var(--font);border-radius:12px;padding:14px 22px;cursor:pointer;border:1px solid var(--btn);background:var(--btn);color:var(--btn-ink);transition:transform .15s,box-shadow .15s}
+button:hover{transform:translateY(-1px);box-shadow:0 8px 20px -10px var(--glow)}
+button.ghost{background:var(--card);color:var(--ink);border-color:var(--line)}
+button:disabled{opacity:.6;cursor:progress;transform:none}
+@media (prefers-reduced-motion:reduce){button{transition:none}button:hover{transform:none}}
+
+/* финальный блок */
+.send{margin-top:64px;position:relative;overflow:hidden;border-radius:28px;padding:36px 28px;display:grid;gap:14px;justify-items:center;text-align:center;
+  background:radial-gradient(120% 90% at 50% 0%,var(--violet-soft) 0%,var(--card) 60%);border:1px solid var(--violet-line)}
+.send h3{margin:0;font-weight:600;font-size:clamp(26px,4vw,38px);line-height:1.08;letter-spacing:-.03em;text-wrap:balance}
+.send p{margin:0;max-width:58ch}
+.send .saved{max-width:62ch}
+.msg{border-radius:14px;padding:14px 16px;font-size:15px;text-align:left;width:100%}
+.msg.warn{background:var(--violet-soft);border:1px solid var(--violet-line)}
 .msg ul{margin:8px 0 0;padding-left:20px}
-.msg a{color:var(--accent)}
-.saved{font:500 12px/1.4 var(--mono);color:var(--ink-soft)}
-#copyBox{min-height:180px;font-size:13px}
+.msg a{color:var(--violet)}
 </style>
 </head>
 <body>
 <div class="strip" role="region" aria-label="Прогресс">
   <div class="strip-in">
-    <div class="prog"><span id="progTxt">Важные вопросы: 0 из 0</span><div class="bar" aria-hidden="true"><i id="progBar"></i></div></div>
+    <div class="prog"><span id="progTxt">Важные вопросы: 0 из 0</span><div class="bar" aria-hidden="true"><i id="progBar"></i></div><button type="button" class="mini" data-pdf>Сохранить PDF</button></div>
     <nav class="nav" id="nav" aria-label="Разделы анкеты"></nav>
   </div>
 </div>
 
 <main class="wrap">
   <header class="intro">
-    <div class="eyebrow">Сайт-визитка бухгалтера</div>
-    <h1>Расскажите о себе, и сайт будет про вас</h1>
+    <span class="pill"><i aria-hidden="true">✦</i>Анкета для сайта-визитки бухгалтера</span>
+    <h1>Расскажите о себе, и сайт будет <span class="grad">про вас</span></h1>
     <p class="lead">По ответам я подберу услуги для сайта, тон текстов, цвета и оформление. Почти везде уже есть готовые варианты, их достаточно отметить.</p>
-    <ul class="howto">
-      <li><b>15–20 минут</b>Отмечайте готовые варианты, своё дописывайте в поле «Другое».</li>
-      <li><b>Ответы не сохраняются на сайте</b>Нажмите «Сохранить в PDF» и пришлите файл мне. Чтобы продолжить или поправить, загрузите этот PDF обратно кнопкой «Загрузить сохранённую анкету».</li>
-      <li><b><span class="star">★</span> — важные вопросы</b>Если времени мало, ответьте хотя бы на них.</li>
-    </ul>
     <div class="btns">
+      <button type="button" data-start>Начать анкету</button>
       <button type="button" class="ghost" data-load>Загрузить сохранённую анкету</button>
-      <button type="button" class="ghost" data-pdf>Сохранить в PDF</button>
     </div>
     <p class="saved" id="topMsg" aria-live="polite"></p>
     <input type="file" id="loadFile" accept=".pdf,application/pdf" hidden>
   </header>
 
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Услуги</span><span><b>УСН</b></span><span>Маркетплейсы</span><span><b>1С</b></span><span>Тон текстов</span><span>Цвета сайта</span><span><b>НДС</b></span><span>Кадры и зарплата</span><span>Истории клиентов</span><span><b>3-НДФЛ</b></span><span>Отчётность</span><span>Фото</span>
+      <span>Услуги</span><span><b>УСН</b></span><span>Маркетплейсы</span><span><b>1С</b></span><span>Тон текстов</span><span>Цвета сайта</span><span><b>НДС</b></span><span>Кадры и зарплата</span><span>Истории клиентов</span><span><b>3-НДФЛ</b></span><span>Отчётность</span><span>Фото</span>
+    </div>
+  </div>
+
+  <ul class="howto">
+    <li><b>15–20 минут</b>Отмечайте готовые варианты, своё дописывайте в поле «Другое».</li>
+    <li><b>Ответы не сохраняются на сайте</b>Нажмите «Сохранить в PDF» и пришлите файл мне. Чтобы продолжить или поправить, загрузите этот PDF обратно.</li>
+    <li><b><span class="star">★</span> — важные вопросы</b>Если времени мало, ответьте хотя бы на них.</li>
+  </ul>
+
   <form id="f" novalidate>
     <div id="sections"></div>
     <div class="send" id="send">
-      <p><b>Готово?</b> Сохраните анкету в PDF и <b>пришлите этот файл мне</b> в мессенджер.</p>
+      <span class="pill"><i aria-hidden="true">✓</i>Последний шаг</span>
+      <h3>Готово? <span class="grad">Сохраните анкету в PDF</span></h3>
+      <p>И пришлите этот файл мне в мессенджер.</p>
       <p class="saved">Ответы не сохраняются на сайте: если закрыть страницу, не сохранив PDF, они пропадут. Сохранённый PDF можно в любой момент загрузить обратно кнопкой «Загрузить сохранённую анкету» вверху страницы, поправить и сохранить заново.</p>
       <div id="sendMsg" hidden></div>
       <div class="btns">
@@ -518,8 +555,8 @@ function pdfDoc(){
     styles:{
       h1:{fontSize:20, bold:true, color:'#1D2740', margin:[0,0,0,4]},
       meta:{fontSize:10, color:'#56607A', margin:[0,0,0,10]},
-      note:{fontSize:9, color:'#56607A', background:'#FBF1C0', margin:[0,0,0,6]},
-      h2:{fontSize:14, bold:true, color:'#2F55D4', margin:[0,16,0,6]},
+      note:{fontSize:9, color:'#56607A', background:'#F3ECFE', margin:[0,0,0,6]},
+      h2:{fontSize:14, bold:true, color:'#9A54EE', margin:[0,16,0,6]},
       q:{fontSize:10, bold:true, color:'#1D2740', margin:[0,6,0,1]},
       a:{fontSize:10, color:'#1D2740', lineHeight:1.2},
       empty:{fontSize:10, color:'#B0B6C4'},
@@ -563,6 +600,7 @@ async function makePdf(btn, out){
   } finally { btn.disabled = false; btn.textContent = label; }
 }
 document.querySelectorAll('[data-pdf]').forEach(b => b.addEventListener('click', e => makePdf(e.currentTarget, $('#topMsg'))));
+document.querySelectorAll('[data-start]').forEach(b => b.addEventListener('click', () => document.getElementById('s0').scrollIntoView()));
 document.querySelectorAll('[data-load]').forEach(b => b.addEventListener('click', () => $('#loadFile').click()));
 $('#loadFile').addEventListener('change', e => { const f = e.target.files[0]; if (f) loadPdf(f); e.target.value = ''; });
 
