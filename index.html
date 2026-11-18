@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Анкета сайта-визитки</title>
+<meta name="description" content="Анкета для бухгалтера: услуги, тон, цвета и контакты для будущего сайта-визитки.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one calm column like a ledger page; sticky progress strip on top, section index chips, answer rows as tappable lines. */
+:root{
+  --paper:#F6F7F9;
+  --sheet:#FFFFFF;
+  --ink:#1D2740;
+  --ink-soft:#56607A;
+  --line:#DCE0E8;
+  --accent:#2F55D4;
+  --mark:#F3D54E;
+  --mark-soft:#FBF1C0;
+  --warn:#B4401F;
+  --ok:#2D7A4B;
+  --display:"Unbounded","Manrope",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#12161F;--sheet:#1A202C;--ink:#E7EAF1;--ink-soft:#A0A8BC;--line:#2E3647;
+  --accent:#8AA4FF;--mark:#E9C93A;--mark-soft:#3A3417;--warn:#FF9C7A;--ok:#7BD39C;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#12161F;--sheet:#1A202C;--ink:#E7EAF1;--ink-soft:#A0A8BC;--line:#2E3647;
+  --accent:#8AA4FF;--mark:#E9C93A;--mark-soft:#3A3417;--warn:#FF9C7A;--ok:#7BD39C;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:820px;margin:0 auto;padding-block:32px 80px}
+
+/* top strip */
+.strip{position:sticky;top:0;z-index:5;background:var(--paper);padding-block:10px 8px;border-bottom:1px solid var(--line);
+  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-top:calc(10px + env(safe-area-inset-top,0px))}
+.strip-in{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.prog{display:flex;align-items:center;gap:12px;font:500 12px/1 var(--mono);color:var(--ink-soft)}
+.bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--mark);transition:width .3s}
+.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;font-size:13px;font-weight:600;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--sheet)}
+.nav a:hover,.nav a:focus-visible{color:var(--ink);border-color:var(--ink-soft)}
+
+/* intro */
+header.intro{padding-block:28px 12px;display:grid;gap:14px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font:600 clamp(28px,5vw,40px)/1.15 var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+.lead{margin:0;max-width:62ch;color:var(--ink-soft)}
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:6px 0 0;padding:0;list-style:none}
+.howto li{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--ink-soft)}
+.howto b{display:block;color:var(--ink);font-size:15px;margin-bottom:2px}
+.star{color:var(--warn);font-weight:700}
+
+/* sections */
+section.sec{margin-top:36px}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-n{font:500 13px/1 var(--mono);color:var(--ink-soft)}
+h2{font:600 22px/1.25 var(--display);margin:0}
+.q{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;margin-bottom:12px}
+.q.miss{border-color:var(--warn);box-shadow:0 0 0 1px var(--warn)}
+.q-l{font-weight:700;font-size:16px;margin:0 0 4px;display:block}
+.q-h{font-size:14px;color:var(--ink-soft);margin:0 0 12px}
+.q-l + .opts,.q-l + .inp,.q-l + .scale,.q-l + .grid3{margin-top:10px}
+
+/* options */
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
+.opts.cards{grid-template-columns:1fr}
+.opt{position:relative;display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:15px;line-height:1.4;min-width:0}
+.opt:hover{border-color:var(--ink-soft)}
+.opt input{margin:2px 0 0;flex:none;width:17px;height:17px;accent-color:var(--accent)}
+.opt:has(input:checked){background:var(--mark-soft);border-color:var(--mark)}
+.opt small{display:block;color:var(--ink-soft);font-size:13px}
+.cards .opt{font-size:15px}
+.other{display:flex;gap:8px;align-items:center;margin-top:8px}
+.other span{font-size:14px;color:var(--ink-soft);flex:none}
+
+input[type=text],input[type=url],textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+textarea{min-height:92px;resize:vertical}
+input:focus-visible,textarea:focus-visible,.opt:has(input:focus-visible),.nav a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.inp.short{max-width:260px}
+
+/* scale */
+.scale{display:grid;gap:10px}
+.srow{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+.srow .l{text-align:right;font-size:14px}
+.srow .r{font-size:14px}
+.dots{display:flex;gap:6px}
+.dots label{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;cursor:pointer;font:500 12px/1 var(--mono);color:var(--ink-soft)}
+.dots input{position:absolute;opacity:0;pointer-events:none}
+.dots label:has(input:checked){background:var(--mark);border-color:var(--mark);color:#1D2740}
+.dots label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:560px){
+  .srow{grid-template-columns:1fr 1fr;row-gap:6px}
+  .srow .l{text-align:left;grid-column:1}
+  .srow .r{text-align:right;grid-column:2;grid-row:1}
+  .srow .dots{grid-column:1 / -1;justify-content:space-between}
+}
+
+/* grids */
+.grid3{display:grid;gap:12px}
+.story{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.story label,.pk label,.fld label{font-size:12px;color:var(--ink-soft);display:grid;gap:4px;min-width:0}
+.pk{display:grid;grid-template-columns:1fr 1.2fr 2fr 1fr;gap:8px}
+.fld{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.site{display:grid;gap:8px;padding-top:4px}
+.site + .site{border-top:1px dashed var(--line);padding-top:12px}
+@media (max-width:640px){.story,.pk{grid-template-columns:1fr}}
+.example{font-size:14px;color:var(--ink-soft);border-left:3px solid var(--mark);padding:2px 0 2px 12px;margin:0 0 12px;display:grid;gap:6px}
+.example p{margin:0}
+
+/* footer / submit */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.send{margin-top:36px;background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:14px}
+.send p{margin:0}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+button{font:600 15px/1 var(--body);border-radius:999px;padding:13px 22px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--paper)}
+button.ghost{background:transparent;color:var(--ink)}
+button:disabled{opacity:.6;cursor:progress}
+.msg{border-radius:10px;padding:14px 16px;font-size:15px}
+.msg.warn{background:var(--mark-soft);border:1px solid var(--mark)}
+.msg.ok{border:1px solid var(--ok);color:var(--ink)}
+.msg.ok b{color:var(--ok)}
+.msg.err{border:1px solid var(--warn)}
+.msg ul{margin:8px 0 0;padding-left:20px}
+.msg a{color:var(--accent)}
+.saved{font:500 12px/1.4 var(--mono);color:var(--ink-soft)}
+#copyBox{min-height:180px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="strip" role="region" aria-label="Прогресс">
+  <div class="strip-in">
+    <div class="prog"><span id="progTxt">Важные вопросы: 0 из 0</span><div class="bar" aria-hidden="true"><i id="progBar"></i></div></div>
+    <nav class="nav" id="nav" aria-label="Разделы анкеты"></nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="intro">
+    <div class="eyebrow">Сайт-визитка бухгалтера</div>
+    <h1>Расскажите о себе, и сайт будет про вас</h1>
+    <p class="lead">По ответам я подберу услуги для сайта, тон текстов, цвета и оформление. Почти везде уже есть готовые варианты, их достаточно отметить.</p>
+    <ul class="howto">
+      <li><b>15–20 минут</b>Отмечайте готовые варианты, своё дописывайте в поле «Другое».</li>
+      <li><b>Ответы не сохраняются на сайте</b>Нажмите «Сохранить в PDF» и пришлите файл мне. Чтобы продолжить или поправить, загрузите этот PDF обратно кнопкой «Загрузить сохранённую анкету».</li>
+      <li><b><span class="star">★</span> — важные вопросы</b>Если времени мало, ответьте хотя бы на них.</li>
+    </ul>
+    <div class="btns">
+      <button type="button" class="ghost" data-load>Загрузить сохранённую анкету</button>
+      <button type="button" class="ghost" data-pdf>Сохранить в PDF</button>
+    </div>
+    <p class="saved" id="topMsg" aria-live="polite"></p>
+    <input type="file" id="loadFile" accept=".pdf,application/pdf" hidden>
+  </header>
+
+  <form id="f" novalidate>
+    <div id="sections"></div>
+    <div class="send" id="send">
+      <p><b>Готово?</b> Сохраните анкету в PDF и <b>пришлите этот файл мне</b> в мессенджер.</p>
+      <p class="saved">Ответы не сохраняются на сайте: если закрыть страницу, не сохранив PDF, они пропадут. Сохранённый PDF можно в любой момент загрузить обратно кнопкой «Загрузить сохранённую анкету» вверху страницы, поправить и сохранить заново.</p>
+      <div id="sendMsg" hidden></div>
+      <div class="btns">
+        <button type="submit" id="sendBtn">Сохранить анкету в PDF</button>
+      </div>
+      <p class="saved" id="pdfMsg" aria-live="polite"></p>
+    </div>
+  </form>
+</main>
+
+<script>
+/* Ответы нигде не хранятся: клиент сохраняет PDF (кнопки внизу и вверху) и присылает его.
+   Тот же PDF загружается обратно для правок — ответы лежат в его метаданных (см. раздел PDF). */
+
+/* ===== ВОПРОСЫ =====
+   type: radio | checks | text | textarea | scale | stories | packages | sites | fields
+   req: true — важный вопрос (★)
+   У всех radio/checks есть поле «Другое» (otherLabel меняет подпись; other:false убирает). */
+const SECTIONS = [
+ {id:'s0', title:'Кто заполняет', short:'Контакты', q:[
+  {id:'0.1', label:'Ваше имя', type:'text', req:true, ph:'Например: Иванова Ирина Дмитриевна'},
+  {id:'0.2', label:'Как с вами связаться', hint:'Telegram, MAX или почта — чтобы я могла уточнить детали.', type:'text', req:true, ph:'@username или почта'},
+ ]},
+ {id:'s1', title:'О вас', short:'О вас', q:[
+  {id:'1.1', label:'Как вас представить на сайте?', type:'radio', req:true, opts:[
+   'По имени: «Ирина»','Имя и фамилия: «Ирина Иванова»','Имя и отчество: «Ирина Дмитриевна»','Полное ФИО: «Иванова Ирина Дмитриевна»','От имени компании: «Бухгалтерская компания „…“»']},
+  {id:'1.2', label:'Кто вы?', hint:'Можно несколько.', type:'checks', req:true, opts:[
+   'Частный бухгалтер (работаю одна)','Владелец бухгалтерской компании / аутсорсинга','Главный бухгалтер с частной практикой','Бывший сотрудник налоговой инспекции','Налоговый консультант','Обучаю / наставляю бухгалтеров']},
+  {id:'1.3', label:'Сколько лет вы в бухгалтерии?', type:'text', req:true, ph:'Например: 12', short:true, numeric:true},
+  {id:'1.4', label:'Где вы работали раньше?', hint:'Можно несколько.', type:'checks', opts:[
+   'Бухгалтер в штате компании','Главный бухгалтер','Бухгалтерская / аудиторская фирма','Налоговая инспекция / госорганы','Банк','Своя практика (с какого года — напишите в «Другое»)']},
+  {id:'1.5', label:'Почему вы работаете на себя?', hint:'Отметьте или напишите свою историю в 2–3 предложениях.', type:'checks', otherLabel:'Своя история', opts:[
+   'Хотела свободный график и больше времени на семью','Хотела зарабатывать больше, чем в найме','Знакомые предприниматели начали просить помочь, и это выросло в дело','Устала от «конвейера», захотела работать с клиентами напрямую','Переехала / ушла в декрет и перешла на удалённую работу']},
+  {id:'1.6', label:'Что вам больше всего нравится в работе?', type:'checks', opts:[
+   'Наводить порядок в документах и цифрах','Находить законные способы сэкономить на налогах','Объяснять сложное простыми словами','Решать нестандартные задачи','Чувствовать, что клиент спокоен благодаря мне','Видеть, как растёт бизнес клиента']},
+  {id:'1.7', label:'Образование и подтверждения квалификации', type:'checks', opts:[
+   'Высшее экономическое образование','Аттестат профессионального бухгалтера (ИПБ России)','Аттестат налогового консультанта','Аттестат аудитора','Курсы повышения квалификации','Сертификаты 1С (например, «1С:Профессионал»)','Сертификаты по МСФО']},
+ ]},
+ {id:'s2', title:'Ваши клиенты', short:'Клиенты', q:[
+  {id:'2.1', label:'С кем вы работаете?', type:'checks', req:true, opts:[
+   'ИП без сотрудников','ИП с сотрудниками','ООО','Самозанятые','Физические лица (3-НДФЛ, вычеты)']},
+  {id:'2.2', label:'Системы налогообложения, с которыми вы работаете', type:'checks', req:true, opts:[
+   'УСН «Доходы» (6%)','УСН «Доходы минус расходы» (15%)','УСН с НДС (5%, 7% или 22%)','АУСН (автоматизированная УСН)','Патент (ПСН)','ОСНО (с НДС)','НПД (самозанятые)','Помогаю выбрать или сменить режим']},
+  {id:'2.3', label:'Отрасли, в которых у вас есть опыт', hint:'Самые сильные можно перечислить в «Другое».', type:'checks', req:true, opts:[
+   'Маркетплейсы (Wildberries, Ozon, Яндекс Маркет)','Розничная торговля / магазины','Оптовая торговля','Общепит (кафе, рестораны, доставка)','Салоны красоты, барбершопы, СПА','Медицина, стоматология','Фитнес, спорт','Образование, онлайн-школы, инфобизнес','ИТ, разработка, digital-агентства','Блогеры, фрилансеры','Строительство, ремонт','Производство','Транспорт, логистика, грузоперевозки','Аренда недвижимости','Туризм, гостиницы','Импорт / экспорт (ВЭД, валютный контроль)','Госзакупки (44-ФЗ, 223-ФЗ)','Сельское хозяйство','Маркировка («Честный знак»), ЕГАИС']},
+  {id:'2.4', label:'С кем вы НЕ работаете или не хотите работать?', type:'checks', opts:[
+   'Нет ограничений','Крупные компании','ОСНО с НДС','ВЭД / валютные операции','Клиенты, которые хотят «серые» схемы','Клиенты, которые не передают документы вовремя']},
+  {id:'2.5', label:'Ваш идеальный клиент — какой он?', type:'checks', req:true, otherLabel:'Своими словами', opts:[
+   'Начинающий предприниматель, которому страшно и непонятно','Действующий бизнес, уставший от бухгалтера, который «пропадает»','Селлер на маркетплейсах, который запутался в отчётах и налогах','Владелец, который хочет понимать свои цифры, а не просто «сдать отчёты»','Компания, которой нужен главбух, но не в штат','Бизнес после ошибок прошлого бухгалтера, где учёт нужно восстановить']},
+  {id:'2.6', label:'С какими вопросами к вам приходят чаще всего?', type:'checks', opts:[
+   '«Открываю ИП, какой режим выбрать?»','«Пришло требование / штраф из налоговой, что делать?»','«Бухгалтер пропал, ничего не понятно»','«Плачу слишком много налогов»','«Нужно сдать нулёвку»','«Нанимаю первого сотрудника, как оформить?»','«Начинаю продавать на маркетплейсе»','«Превышаю лимит по УСН / появился НДС»','«Банк блокирует счёт по 115-ФЗ»']},
+ ]},
+ {id:'s3', title:'Услуги и цены', short:'Услуги', q:[
+  {id:'3.1', label:'Какие услуги вы оказываете?', hint:'Отметьте всё, что делаете.', type:'checks', req:true, groups:[
+   ['Учёт и отчётность',['Бухгалтерское сопровождение «под ключ»','Сдача отчётности (декларации, РСВ, 6-НДФЛ, ЕФС-1)','Нулевая отчётность','Расчёт налогов и подготовка платёжек','Годовая бухгалтерская отчётность','Восстановление учёта за прошлые периоды','Экспресс-проверка учёта (диагностика ошибок)']],
+   ['Сотрудники',['Кадровый учёт (приём, увольнение, отпуска)','Расчёт зарплаты и взносов','Оформление иностранных сотрудников']],
+   ['Налоги и защита',['Ответы на требования ФНС','Сопровождение налоговых проверок','Налоговое планирование, законная оптимизация','Выбор и смена режима налогообложения','Контроль лимитов УСН / НДС','Помощь при блокировках по 115-ФЗ']],
+   ['Бизнес и управление',['Управленческий учёт (прибыль, ДДС)','Финансовый анализ, бюджетирование','Консультации владельца по цифрам бизнеса','Учёт для маркетплейсов (отчёты WB/Ozon, себестоимость)']],
+   ['Разовые услуги',['Регистрация ИП / ООО','Ликвидация / закрытие ИП','Декларации 3-НДФЛ и вычеты для физлиц','Разовые консультации','Настройка 1С / перенос базы','Подключение ЭДО, онлайн-касс']],
+   ['Для бухгалтеров',['Наставничество / обучение бухгалтеров','Консультации коллег по сложным вопросам']],
+  ]},
+  {id:'3.2', label:'Какая услуга главная?', hint:'На ней сделаем акцент на первом экране.', type:'text', req:true, ph:'Например: бухгалтерия для селлеров маркетплейсов'},
+  {id:'3.3', label:'Как показывать цены на сайте?', type:'radio', req:true, opts:[
+   'Точные цены по пакетам','«От … ₽» (например, «ИП на УСН без сотрудников — от 5 000 ₽/мес»)','Только «стоимость после бесплатной консультации»','Калькулятор стоимости на сайте','Не показывать вообще']},
+  {id:'3.4', label:'Как устроена оплата?', type:'checks', opts:[
+   'Фиксированная ежемесячная плата (абонемент)','Пакеты (например, «Старт» / «Бизнес» / «Премиум»)','Зависит от количества операций / документов / сотрудников','Почасовая оплата','Разовая оплата за услугу','Скидка при оплате за квартал / год','Первый месяц со скидкой / бесплатно']},
+  {id:'3.5', label:'Пакеты и цены', hint:'Если есть пакеты — впишите. Если нет, пропустите.', type:'packages'},
+  {id:'3.6', label:'Где и как вы работаете?', type:'checks', opts:[
+   'Удалённо по всей России','Только в своём городе (каком — в «Другое»)','Можно встретиться лично','Выезжаю к клиенту']},
+  {id:'3.7', label:'В каких программах вы работаете?', type:'checks', opts:[
+   '1С:Бухгалтерия','1С:Фреш (облачная 1С)','1С:ЗУП','1С:УНФ','Контур.Бухгалтерия / Контур.Экстерн','СБИС (Saby)','Моё дело','Контур.Эльба','Работаю в программе клиента']},
+  {id:'3.8', label:'Как начинается работа с вами?', hint:'Отметьте шаги.', type:'checks', req:true, opts:[
+   'Бесплатная консультация (сколько минут — в «Другое»)','Платная первичная консультация','Анализ документов / текущего состояния учёта','Коммерческое предложение с ценой','Договор','Доверенность / электронная подпись для отчётности','Доступ к банку (выписки)','Передача документов от прошлого бухгалтера']},
+ ]},
+ {id:'s4', title:'Почему именно вы', short:'Почему вы', q:[
+  {id:'4.1', label:'Чем вы отличаетесь от других бухгалтеров?', hint:'Отметьте 3–5 самых правдивых.', type:'checks', req:true, opts:[
+   'Всегда на связи в мессенджере','Объясняю простым языком, без «бухгалтерского»','Нахожу законные способы платить меньше налогов','Никогда не срываю сроки','Сама напоминаю, что и когда нужно сделать','Глубоко знаю одну отрасль','Работала в налоговой и знаю, как они проверяют','Опыт главного бухгалтера в крупной компании','Работаю лично, а не «передаю помощнику»','Есть команда — работа не встаёт при отпуске / болезни','Фиксированная понятная цена','Помогаю не только с отчётами, но и с решениями по бизнесу','Спокойная, не паникую в сложных ситуациях']},
+  {id:'4.2', label:'Цифры, которые можно показать', hint:'Впишите только то, что есть.', type:'fields', req:true, fields:[
+   'Клиентов сейчас','Клиентов за всё время','Самый долгий клиент со мной, лет','Сдано деклараций / отчётов','Сэкономили клиентам на налогах, ₽','Восстановили учёт, компаний','Учеников / обученных бухгалтеров','Другое']},
+  {id:'4.3', label:'Истории клиентов', hint:'1–3 истории, без названий компаний. Схема: было → что сделали → результат.', type:'stories', examples:[
+   '«ИП на маркетплейсе получил требование из налоговой на 400 000 ₽. Разобрали отчёты Wildberries, подготовили пояснения — требование сняли.»',
+   '«ООО два года вело учёт „как получится“. За 3 месяца восстановили учёт и сдали уточнённые декларации — без штрафов.»',
+   '«Клиент на УСН 6% платил много налогов. Пересчитали и перевели на УСН 15% — экономия около 300 000 ₽ в год.»']},
+  {id:'4.4', label:'Отзывы', hint:'На сайте отзывы публикуются анонимно, текстом в стиле сайта.', type:'checks', opts:[
+   'Есть текстовые отзывы','Есть скриншоты переписок / отзывов','Есть видеоотзывы','Есть отзывы на Яндекс Картах / 2ГИС / Авито / Профи.ру','Пока нет']},
+  {id:'4.5', label:'Вы работаете…', type:'radio', opts:['Одна','С помощником(-ами)','Командой']},
+ ]},
+ {id:'s5', title:'Как вы общаетесь', short:'Тон', q:[
+  {id:'5.1', label:'Как обращаться к посетителям сайта?', type:'radio', req:true, opts:['На «вы»','На «ты»']},
+  {id:'5.2', label:'Как вы говорите о себе?', type:'radio', req:true, opts:['«Я» — лично от себя','«Мы» — от команды / компании']},
+  {id:'5.3', label:'Какой стиль вам ближе?', hint:'Отметьте точку на каждой шкале.', type:'scale', req:true, rows:[
+   ['Строго, официально','Тепло, по-человечески'],['Коротко, по делу','Подробно, с объяснениями'],['Серьёзно','С лёгким юмором'],['Сдержанно','Эмоционально'],['Без эмодзи','С эмодзи 🙂']]},
+  {id:'5.4', label:'Главная фраза сайта: какой вариант ближе?', hint:'Цифры и специализации в примерах условные — выбираете стиль. Можно написать свой вариант.', type:'radio', req:true, cards:true, otherLabel:'Свой вариант', opts:[
+   'А. «Бухгалтерия для ИП и ООО на УСН: учёт, отчётность, налоги, зарплата.»',
+   'Б. «Веду учёт ИП и ООО на УСН и ОСНО. Отчётность — в срок, налоги — рассчитаны заранее.»',
+   'В. «Бухгалтерия для селлеров маркетплейсов: учёт продаж, себестоимость, налоги на УСН.»',
+   'Г. «Частный бухгалтер, 12 лет практики. ИП и ООО, удалённо по всей России.»']},
+  {id:'5.5', label:'Текст «О себе»: какой вариант ближе?', hint:'Цифры в примерах условные — выбираете стиль. Можно написать свой вариант.', type:'radio', req:true, cards:true, otherLabel:'Свой вариант', opts:[
+   'А. «Опыт — 12 лет, из них 5 лет главным бухгалтером. Сейчас веду 25 клиентов: ИП и ООО на УСН и ОСНО.»',
+   'Б. «В бухгалтерии с 2013 года. Специализация — маркетплейсы и розница. Работаю в 1С и Контур.Экстерн.»',
+   'В. «Аттестат профессионального бухгалтера ИПБ России. Веду учёт, сдаю отчётность, отвечаю на требования ФНС. Работаю по договору.»']},
+  {id:'5.6', label:'Как бы вы ответили клиенту в мессенджере?', hint:'Клиент пишет: «Здравствуйте! Я открыла ИП, продаю на Ozon. Сколько стоит вести мою бухгалтерию и что от меня нужно?» Ответьте так, как пишете обычно, хотя бы 2–3 предложения.', type:'textarea', req:true, ph:'Ваш ответ…'},
+  {id:'5.7', label:'Выберите 3 слова, которыми вас должны описывать клиенты', type:'checks', req:true, max:3, opts:[
+   'надёжная','спокойная','внимательная','дотошная','быстрая','честная','строгая','заботливая','гибкая','современная','опытная','доступная','понятная','решительная','терпеливая','пунктуальная','дружелюбная','профессиональная','смелая','тактичная']},
+  {id:'5.8', label:'Каких фраз на вашем сайте точно быть НЕ должно?', type:'checks', opts:[
+   '«Индивидуальный подход к каждому клиенту»','«Профессионалы своего дела»','«Качественно и в срок»','«Доверьте бухгалтерию профессионалам»','«Команда экспертов»','«Под ключ»','Канцелярит («осуществляем ведение», «в рамках»)','Восклицательные знаки и КАПС','Обещания «сэкономим 50% налогов»','Запугивание штрафами и проверками']},
+  {id:'5.9', label:'Где можно посмотреть, как вы пишете?', hint:'Ссылки на Telegram-канал, ВКонтакте, блог. Если нигде — оставьте пустым.', type:'textarea', ph:'https://t.me/…'},
+ ]},
+ {id:'s6', title:'Внешний вид', short:'Дизайн', q:[
+  {id:'6.1', label:'Какое настроение должен вызывать сайт?', hint:'1–2 варианта.', type:'checks', req:true, max:2, opts:[
+   'Строгий и деловой — «серьёзный специалист, всё по правилам»','Светлый и спокойный — «с ней не страшно»','Тёплый и уютный — «как с хорошей знакомой»','Современный и яркий — «на волне, в цифре»','Премиальный — «дорого, статусно, для серьёзного бизнеса»','Минималистичный — «ничего лишнего, только суть»']},
+  {id:'6.2', label:'Цветовая гамма', hint:'1–2 варианта.', type:'checks', req:true, otherLabel:'Ваши цвета', opts:[
+   'Тёмно-зелёный + золото — премиально, спокойно','Тёмно-синий + белый — надёжно, по-деловому','Бежевый + коричневый / терракота — тепло, уютно','Белый + один яркий акцент — современно, чисто','Пастельные тона (пудровый, мятный, лавандовый) — мягко','Графит / чёрный + жёлтый — смело, энергично','Бордо + кремовый — благородно, классично','Бирюза / мятный + белый — свежо, легко']},
+  {id:'6.3', label:'Цвета, которых точно НЕ должно быть', type:'text', ph:'Например: красный, кислотные цвета'},
+  {id:'6.4', label:'Шрифт', type:'radio', opts:[
+   'Классический, с засечками (как в книгах) — солидно','Современный, без засечек — просто и чисто','Сочетание: заголовки с засечками, текст без','Не знаю, на ваш вкус']},
+  {id:'6.5', label:'Фирменный стиль', type:'radio', opts:[
+   'Есть логотип (пришлю файл)','Есть фирменные цвета / шрифты','Ничего нет — сделайте простой знак из инициалов','Логотип не нужен']},
+  {id:'6.6', label:'Фото', type:'radio', req:true, opts:[
+   'Есть профессиональные фото (пришлю 3–5 штук)','Есть хорошие фото с телефона','Нужно доработать фото с помощью ИИ','Не хочу своё фото — используем иллюстрации / монограмму']},
+  {id:'6.7', label:'Какие фото вам ближе?', type:'checks', opts:[
+   'Деловой портрет на нейтральном фоне','За работой (ноутбук, документы, рабочее место)','В жизни: улыбка, кафе, улица, природа','Без лица (руки, рабочий стол, детали)']},
+  {id:'6.8', label:'Что должно быть на сайте?', hint:'Отметьте нужные блоки.', type:'checks', opts:[
+   'Обо мне','Услуги','Цены / пакеты','Как проходит работа (шаги)','Кому я помогаю (отрасли)','Истории клиентов','Отзывы','Цифры и достижения','Дипломы и сертификаты','Частые вопросы','Калькулятор стоимости','Полезный подарок (например, что-то скачать: гайд, чек-лист или ссылка на что-то)','Ссылки на соцсети']},
+  {id:'6.9', label:'Сайты, которые вам нравятся', hint:'Любые, даже не про бухгалтерию. Отметьте, что именно нравится.', type:'sites'},
+  {id:'6.10', label:'Нужны ли анимации?', type:'radio', opts:[
+   'Нет, всё спокойно и статично','Немного: плавное появление блоков','Да, пусть сайт будет «живым» и запоминающимся']},
+ ]},
+ {id:'s7', title:'Контакты и адрес сайта', short:'Контакты сайта', q:[
+  {id:'7.1', label:'Контакты для сайта', hint:'Заполните те, что нужно показать на сайте. По ним клиенты будут вам писать.', type:'fields', req:true, fields:['Личный Telegram','MAX','Почта','Другое']},
+  {id:'7.2', label:'Адрес сайта (домен)', type:'radio', otherLabel:'Ваш домен или варианты названия', opts:[
+   'Есть свой домен (впишите в поле ниже)','Нет, нужен свой именной домен (готовы оплачивать его)','Подойдёт бесплатный домен (в адресе будет …github.io/…)']},
+ ]},
+ {id:'s8', title:'Сроки и пожелания', short:'Сроки', q:[
+  {id:'8.1', label:'Когда нужен сайт?', type:'radio', req:true, otherLabel:'Другое / к какому событию', opts:['Срочно, в течение недели','В течение 2–3 недель','В течение месяца','Не горит']},
+  {id:'8.2', label:'Что ещё важно знать?', hint:'Любые пожелания, страхи, идеи.', type:'textarea'},
+ ]},
+];
+
+/* ===== РЕНДЕР ===== */
+const $ = (s, r=document) => r.querySelector(s);
+const el = (tag, attrs={}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs)) {
+    if (v === false || v == null) continue;
+    if (k === 'class') n.className = v; else if (k === 'text') n.textContent = v; else n.setAttribute(k, v === true ? '' : v);
+  }
+  kids.flat().forEach(k => k != null && n.append(k));
+  return n;
+};
+const slug = id => 'q' + id.replace(/\./g,'_');
+
+function optRow(type, name, value, id){
+  return el('label',{class:'opt'}, el('input',{type, name, value, id}), el('span',{text:value}));
+}
+function otherRow(q){
+  return el('div',{class:'other'}, el('span',{text:(q.otherLabel||'Другое')+':'}), el('input',{type:'text', id:slug(q.id)+'_other', 'aria-label':q.label+' — '+(q.otherLabel||'Другое')}));
+}
+
+function renderQ(q){
+  const box = el('div',{class:'q', id:'box_'+slug(q.id), 'data-q':q.id});
+  const lab = el('span',{class:'q-l'}, q.req ? el('span',{class:'star', text:'★ '}) : null, q.label);
+  box.append(lab);
+  if (q.hint) box.append(el('p',{class:'q-h', text:q.hint}));
+  const name = slug(q.id);
+  switch(q.type){
+    case 'radio': case 'checks': {
+      const t = q.type==='radio' ? 'radio' : 'checkbox';
+      if (q.groups){
+        let i=0;
+        q.groups.forEach(([g,opts]) => {
+          box.append(el('p',{class:'q-h', style:'margin:12px 0 6px;font-weight:700;color:var(--ink)', text:g}));
+          box.append(el('div',{class:'opts'}, opts.map(o => optRow(t,name,o,name+'_'+(i++)))));
+        });
+      } else {
+        box.append(el('div',{class:'opts'+(q.cards?' cards':'')}, q.opts.map((o,i) => optRow(t,name,o,name+'_'+i))));
+      }
+      if (q.other !== false) box.append(otherRow(q));
+      if (q.max) box.addEventListener('change', e => {
+        if (e.target.type!=='checkbox') return;
+        const on = box.querySelectorAll('input[type=checkbox]:checked');
+        if (on.length > q.max) e.target.checked = false;
+      });
+      break;
+    }
+    case 'text':
+      box.append(el('input',{type:'text', id:name, class:'inp'+(q.short?' short':''), placeholder:q.ph||'', inputmode:q.numeric?'numeric':null, 'aria-label':q.label}));
+      break;
+    case 'textarea':
+      box.append(el('textarea',{id:name, placeholder:q.ph||'', 'aria-label':q.label}));
+      break;
+    case 'scale':
+      box.append(el('div',{class:'scale'}, q.rows.map((r,ri) => el('div',{class:'srow', role:'radiogroup', 'aria-label':r[0]+' — '+r[1]},
+        el('span',{class:'l', text:r[0]}),
+        el('div',{class:'dots'}, [1,2,3,4,5].map(n => el('label',{}, el('input',{type:'radio', name:name+'_'+ri, value:String(n), id:name+'_'+ri+'_'+n, 'aria-label':String(n)}), String(n)))),
+        el('span',{class:'r', text:r[1]})
+      ))));
+      break;
+    case 'fields':
+      box.append(el('div',{class:'fld'}, q.fields.map((f,i) => el('label',{}, f, el('input',{type:'text', id:name+'_'+i})))));
+      break;
+    case 'stories':
+      box.append(el('div',{class:'example'}, el('b',{text:'Примеры, чтобы было понятно:'}), q.examples.map(x => el('p',{text:x}))));
+      box.append(el('div',{class:'grid3'}, [0,1,2].map(i => el('div',{class:'story'},
+        ['Было','Что сделали','Результат'].map((h,j) => el('label',{}, (i+1)+'. '+h, el('textarea',{id:name+'_'+i+'_'+j, style:'min-height:70px'})))
+      ))));
+      break;
+    case 'packages':
+      box.append(el('div',{class:'grid3'}, [0,1,2].map(i => el('div',{class:'pk'},
+        ['Пакет','Для кого','Что входит','Цена'].map((h,j) => el('label',{}, h, el('input',{type:'text', id:name+'_'+i+'_'+j, placeholder: i===0 ? ['Старт','ИП без сотрудников','Учёт, отчётность, налоги','5 000 ₽/мес'][j] : ''})))
+      ))));
+      break;
+    case 'sites': {
+      const likes = ['цвета','шрифты','фото','тексты','простота'];
+      box.append(el('div',{}, [0,1].map(i => el('div',{class:'site'},
+        el('input',{type:'url', id:name+'_'+i+'_url', placeholder:'Ссылка на сайт '+(i+1), 'aria-label':'Ссылка на сайт '+(i+1)}),
+        el('div',{class:'opts'}, likes.map((l,j) => optRow('checkbox', name+'_'+i+'_likes', l, name+'_'+i+'_l'+j))),
+        el('div',{class:'other'}, el('span',{text:'Другое:'}), el('input',{type:'text', id:name+'_'+i+'_other', 'aria-label':'Сайт '+(i+1)+' — что ещё нравится'}))
+      ))));
+      break;
+    }
+  }
+  return box;
+}
+
+const secWrap = $('#sections'), nav = $('#nav');
+SECTIONS.forEach((s,si) => {
+  const sec = el('section',{class:'sec', id:s.id, 'aria-labelledby':s.id+'_h'},
+    el('div',{class:'sec-h'}, el('span',{class:'sec-n', text: si===0 ? '00' : String(si).padStart(2,'0')}), el('h2',{id:s.id+'_h', text:s.title})),
+    s.q.map(renderQ));
+  secWrap.append(sec);
+  nav.append(el('a',{href:'#'+s.id, text:s.short}));
+});
+
+/* ===== СБОР ОТВЕТОВ ===== */
+const val = id => { const n = document.getElementById(id); return n ? n.value.trim() : ''; };
+const checked = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(i => i.value);
+
+function answersOf(q){
+  const name = slug(q.id), out = [];          // [[колонка, значение], ...]
+  const key = q.id + ' ' + q.label;
+  switch(q.type){
+    case 'radio': case 'checks': {
+      const parts = checked(name);
+      const o = q.other !== false ? val(name+'_other') : '';
+      if (o) parts.push((q.otherLabel||'Другое') + ': ' + o);
+      out.push([key, parts.join('; ')]); break;
+    }
+    case 'text': case 'textarea': out.push([key, val(name)]); break;
+    case 'scale': q.rows.forEach((r,ri) => { const c = checked(name+'_'+ri)[0]; out.push([`${q.id} ${r[0]} ↔ ${r[1]} (1–5)`, c||'']); }); break;
+    case 'fields': q.fields.forEach((f,i) => out.push([`${q.id} ${f}`, val(name+'_'+i)])); break;
+    case 'stories': [0,1,2].forEach(i => {
+      const p = [0,1,2].map(j => val(name+'_'+i+'_'+j));
+      out.push([`${q.id} История ${i+1}`, p.some(Boolean) ? `Было: ${p[0]} → Сделали: ${p[1]} → Результат: ${p[2]}` : '']);
+    }); break;
+    case 'packages': {
+      const rows = [0,1,2].map(i => [0,1,2,3].map(j => val(name+'_'+i+'_'+j))).filter(r => r.some(Boolean));
+      out.push([key, rows.map(r => r.join(' | ')).join('\n')]); break;
+    }
+    case 'sites': {
+      [0,1].forEach(i => { const u = val(name+'_'+i+'_url'), l = checked(name+'_'+i+'_likes'), o = val(name+'_'+i+'_other'); if (o) l.push(o);
+        out.push([`${q.id} Сайт ${i+1}`, u ? u + (l.length ? ' — нравится: ' + l.join(', ') : '') : '']); });
+      break;
+    }
+  }
+  return out;
+}
+function collect(){
+  const data = {};
+  SECTIONS.forEach(s => s.q.forEach(q => answersOf(q).forEach(([k,v]) => data[k] = v)));
+  return data;
+}
+const answered = q => answersOf(q).some(([,v]) => v);
+
+/* ===== ПРОГРЕСС ===== */
+const REQ = SECTIONS.flatMap(s => s.q.filter(q => q.req));
+function progress(){
+  const done = REQ.filter(answered).length;
+  $('#progTxt').textContent = `Важные вопросы: ${done} из ${REQ.length}`;
+  $('#progBar').style.width = (done/REQ.length*100) + '%';
+  REQ.forEach(q => { if (answered(q)) document.getElementById('box_'+slug(q.id)).classList.remove('miss'); });
+}
+
+/* ===== СНИМОК ФОРМЫ (для черновика и PDF) ===== */
+const form = $('#f');
+function snapshot(){
+  const d = {};
+  form.querySelectorAll('input,textarea').forEach(n => {
+    if (n.id === 'website' || !n.id) return;
+    if (n.type === 'checkbox' || n.type === 'radio') { if (n.checked) d[n.id] = true; }
+    else if (n.value) d[n.id] = n.value;
+  });
+  return d;
+}
+function restore(d){
+  form.reset();
+  for (const [id,v] of Object.entries(d || {})) {
+    const n = document.getElementById(id);
+    if (!n || !form.contains(n)) continue;          // поле могло исчезнуть в новой версии анкеты
+    if (n.type === 'checkbox' || n.type === 'radio') n.checked = true; else n.value = String(v);
+  }
+}
+
+/* ===== PDF: сохранить и загрузить обратно =====
+   Ответы в машинном виде лежат в метаданных PDF (Keywords): «ANKETA1:<base64 JSON>». */
+const PDF_LIBS = ['https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js',
+                  'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.min.js'];
+const PDF_MARK = 'ANKETA1:';
+let pdfLibs = null;
+function loadPdfLibs(){
+  if (!pdfLibs) pdfLibs = PDF_LIBS.reduce((p, src) => p.then(() => new Promise((ok, fail) => {
+    const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => fail(new Error('load'));
+    document.head.append(s);
+  })), Promise.resolve()).catch(e => { pdfLibs = null; throw e; });
+  return pdfLibs;
+}
+function toB64(str){
+  const b = new TextEncoder().encode(str); let s = '';
+  for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+const fromB64 = b64 => new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0)));
+const pad2 = n => String(n).padStart(2,'0');
+
+function pdfDoc(){
+  const now = new Date();
+  const name = val('q0_1') || 'Без имени';
+  const content = [
+    {text:'Анкета для сайта-визитки', style:'h1'},
+    {text:`${name} · сохранено ${now.toLocaleDateString('ru-RU')} ${pad2(now.getHours())}:${pad2(now.getMinutes())}`, style:'meta'},
+    {text:'Как внести правки: откройте анкету на сайте → «Загрузить сохранённую анкету» → выберите этот PDF, поправьте ответы и сохраните заново.', style:'note'},
+  ];
+  SECTIONS.forEach(s => {
+    content.push({text:s.title, style:'h2'});
+    s.q.forEach(q => answersOf(q).forEach(([k, v]) => {
+      content.push({text:k, style:'q'});
+      content.push(v ? {text:v.split('; ').join('\n'), style:'a'} : {text:'—', style:'empty'});
+    }));
+  });
+  return {
+    info:{title:'Анкета для сайта-визитки — ' + name, author:name, subject:'Анкета для сайта-визитки',
+          keywords: PDF_MARK + toB64(JSON.stringify({v:1, fields:snapshot()}))},
+    pageSize:'A4', pageMargins:[48,48,48,52],
+    footer:(p, n) => ({text:`${name} · ${p} / ${n}`, alignment:'center', fontSize:8, color:'#8A93A8', margin:[0,16,0,0]}),
+    content,
+    styles:{
+      h1:{fontSize:20, bold:true, color:'#1D2740', margin:[0,0,0,4]},
+      meta:{fontSize:10, color:'#56607A', margin:[0,0,0,10]},
+      note:{fontSize:9, color:'#56607A', background:'#FBF1C0', margin:[0,0,0,6]},
+      h2:{fontSize:14, bold:true, color:'#2F55D4', margin:[0,16,0,6]},
+      q:{fontSize:10, bold:true, color:'#1D2740', margin:[0,6,0,1]},
+      a:{fontSize:10, color:'#1D2740', lineHeight:1.2},
+      empty:{fontSize:10, color:'#B0B6C4'},
+    },
+    defaultStyle:{font:'Roboto'},
+  };
+}
+function pdfName(){
+  const d = new Date(), n = (val('q0_1') || 'без_имени').replace(/[^\p{L}\p{N}]+/gu, '_').replace(/^_|_$/g, '');
+  return `Анкета_${n}_${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}.pdf`;
+}
+async function readPdf(file){
+  const b = new Uint8Array(await file.arrayBuffer()); let s = '';
+  for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+  const m = s.match(/ANKETA1:([A-Za-z0-9+\/=]+)/);
+  if (!m) throw new Error('nodata');
+  const data = JSON.parse(fromB64(m[1]));
+  if (!data || typeof data.fields !== 'object') throw new Error('nodata');
+  return data.fields;
+}
+async function loadPdf(file){
+  const out = $('#topMsg');
+  try {
+    restore(await readPdf(file));
+    progress(); dirty = false;
+    out.textContent = `Анкета загружена из файла «${file.name}». Поправьте ответы и сохраните PDF заново.`;
+  } catch(err) {
+    out.textContent = 'Не получилось загрузить: выберите PDF, сохранённый на этой странице кнопкой «Сохранить в PDF».';
+  }
+}
+async function makePdf(btn, out){
+  const label = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Готовлю PDF…';
+  try {
+    await loadPdfLibs();
+    pdfMake.createPdf(pdfDoc()).download(pdfName());
+    dirty = false;
+    out.textContent = 'PDF сохранён в папку «Загрузки». Пришлите этот файл мне. Чтобы потом внести правки, загрузите его сюда кнопкой «Загрузить сохранённую анкету».';
+  } catch(err) {
+    out.textContent = 'Не получилось создать PDF. Проверьте интернет и попробуйте ещё раз.';
+  } finally { btn.disabled = false; btn.textContent = label; }
+}
+document.querySelectorAll('[data-pdf]').forEach(b => b.addEventListener('click', e => makePdf(e.currentTarget, $('#topMsg'))));
+document.querySelectorAll('[data-load]').forEach(b => b.addEventListener('click', () => $('#loadFile').click()));
+$('#loadFile').addEventListener('change', e => { const f = e.target.files[0]; if (f) loadPdf(f); e.target.value = ''; });
+
+/* ===== НЕСОХРАНЁННЫЕ ИЗМЕНЕНИЯ: данные не хранятся на сайте, поэтому предупреждаем при закрытии ===== */
+let dirty = false;
+form.addEventListener('input', () => { progress(); dirty = true; });
+form.addEventListener('change', () => { progress(); dirty = true; });
+window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+progress();
+
+/* ===== ГЛАВНАЯ КНОПКА: проверить важные вопросы и сохранить PDF ===== */
+const msg = $('#sendMsg'), btn = $('#sendBtn');
+let force = false;
+function show(cls, nodes){ msg.className = 'msg ' + cls; msg.replaceChildren(...nodes); msg.hidden = false; }
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const missing = REQ.filter(q => !answered(q));
+  if (missing.length && !force) {
+    missing.forEach(q => document.getElementById('box_'+slug(q.id)).classList.add('miss'));
+    const back = el('button',{type:'button', class:'ghost', text:'Вернуться к вопросам'});
+    back.addEventListener('click', () => document.getElementById('box_'+slug(missing[0].id)).scrollIntoView({block:'center'}));
+    const go = el('button',{type:'button', text:'Сохранить как есть'});
+    go.addEventListener('click', () => { force = true; form.requestSubmit(); });
+    show('warn', [el('b',{text:`Не заполнено важных вопросов: ${missing.length}`}),
+      el('ul',{}, missing.slice(0,8).map(q => el('li',{}, el('a',{href:'#box_'+slug(q.id), text:q.label})))),
+      missing.length > 8 ? el('p',{text:`…и ещё ${missing.length-8}`}) : null,
+      el('div',{class:'btns', style:'margin-top:12px'}, back, go)]);
+    return;
+  }
+  force = false;
+  msg.hidden = true;
+  makePdf(btn, $('#pdfMsg'));
+});
